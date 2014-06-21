@@ -3,16 +3,19 @@
 \alias{assert}
 \title{Explicitly state that we expect no errors to occur.}
 \usage{
-assert(expr, info)
+assert(expr, ...)
 }
 \arguments{
 \item{expr}{expression. This expression should not error.}
 
-\item{info}{character. The error message to display.}
+\item{...}{additional arguments to \code{expect_false}, like \code{info}.}
 }
 \description{
 Note we could simply write the expression itself and let it error,
 but using \code{assert} makes the intention of the code clearer
 (like using \code{base::force}).
+}
+\details{
+For testing the converse, there already is \code{expect_error}.
 }
 

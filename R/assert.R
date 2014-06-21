@@ -4,14 +4,14 @@
 #' but using \code{assert} makes the intention of the code clearer 
 #' (like using \code{base::force}).
 #'
+#' For testing the converse, there already is \code{expect_error}.
+#'
 #' @param expr expression. This expression should not error.
-#' @param info character. The error message to display.
+#' @param ... additional arguments to \code{expect_false}, like \code{info}.
 #' @export
-assert <- function(expr, info) {
+assert <- function(expr, ...) {
   result <- tryCatch(error = identity, eval.parent(substitute(expr)))
-  if (is(result, 'error')) {
-    if (missing(info)) stop(result)
-    else stop(info)
-  }
+  expect_false(is(result, 'error'), ...)
 }
+
 
