@@ -1,6 +1,7 @@
 context('expect_is_file')
 
 local({
+  expect_is_file <- expect_is_file
   environment(expect_is_file)$expect_true <- stopifnot
 
   test_that('it returns an error on a non-character', {
