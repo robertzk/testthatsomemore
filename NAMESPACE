@@ -2,7 +2,7 @@
 
 export("stub<-")
 export(assert)
-export(create_test_files)
+export(create_file_structure)
 export(expect_is_directory)
 export(expect_is_file)
 export(is.directory)

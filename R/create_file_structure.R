@@ -7,7 +7,7 @@
 #' it would be very cumbersome to create these files manually. Instead, we can
 #' do the following:
 #'
-#' \code{test_dir <- create_test_files(list(dir1 = list('file1',
+#' \code{test_dir <- create_file_structure(list(dir1 = list('file1',
 #'    file2.r = 'print("Sample R code")'), file3.csv = "a,b,c\n1,2,3"))}
 #'
 #' with the return value being a test directory containing these structured files.
@@ -16,7 +16,7 @@
 #' of the hierarchical files existing, with the files getting deleted after
 #' the expression executes:
 #'
-#' \code{create_test_files(list(a = "hello\nworld"),
+#' \code{create_file_structure(list(a = "hello\nworld"),
 #'   cat(readLines(file.path(tempdir, 'a'))[[2]]))}
 #'
 #' The above will print \code{"world"}. (\code{tempdir} is set automatically
@@ -42,19 +42,19 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'   test_dir <- create_test_files(list(test = 'blah', 'test2'))
+#'   test_dir <- create_file_structure(list(test = 'blah', 'test2'))
 #'   # Now test_dir is the location of a directory containing a file 'test'
 #'   # with the string 'blah' and an empty file 'test2'.
 #'
-#'   test_dir <- create_test_files(list(alphabet = as.list(LETTERS)))
+#'   test_dir <- create_file_structure(list(alphabet = as.list(LETTERS)))
 #'   # Now test_dir is the location of a directory containing a subdirectory
 #'   # 'alphabet' with the files 'A', 'B', ..., 'Z' (all empty).
 #'
-#'   test_dir <- create_test_files(list(a = 'hello'), {
+#'   test_dir <- create_file_structure(list(a = 'hello'), {
 #'     cat(readLines(file.path(tempdir, 'a')))
 #'   })
 #' }
-create_test_files <- function(files, expr, dir) {
+create_file_structure <- function(files, expr, dir) {
   if (missing(files)) files <- NULL
   files <- as.list(files)
 
@@ -83,7 +83,7 @@ create_test_files <- function(files, expr, dir) {
     if (is.list(body)) {
       dir.create(subdir <- file.path(dir, name),
                  showWarnings = FALSE, recursive = TRUE)
-      create_test_files(body, dir = subdir)
+      create_file_structure(body, dir = subdir)
     } else writeLines(body %||% '', file.path(dir, name))
   })
 
