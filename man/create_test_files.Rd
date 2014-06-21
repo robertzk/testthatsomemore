@@ -6,9 +6,12 @@
 create_test_files(files, dir)
 }
 \arguments{
-\item{files}{list. A nested file structure. The names of the list will decide
-the names of the files, and the terminal nodes should be strings which
-will populate the file bodies.}
+\item{files}{character or list or NULL. A nested file structure. The names of the
+list will decide the names of the files, and the terminal nodes should be
+strings which will populate the file bodies. One can also specify a
+character (for example, \code{files = c('a','b','c')} will create three
+files with those filenames). By default, \code{files = NULL} in which case
+simply an empty directory will be created.}
 
 \item{dir}{character. The directory in which to create the files. If
 missing, a temporary directory will be created instead using
@@ -30,8 +33,6 @@ do the following:
    file2.r = 'print("Sample R code")'), file3.csv = "a,b,c\n1,2,3"))}
 
 with the return value being a test directory containing these structured files.
-Additionally, \code{create_test_files} has created an \code{on.exit} trigger
-in the calling environment that will unlink everything in this test directory.
 }
 \examples{
 \dontrun{

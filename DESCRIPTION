@@ -1,10 +1,22 @@
 Package: testthatsomemore
-Title: What the package does (short line)
+Title: A mocking, stubbing, and file testing framework extending testthat
 Version: 0.1
-Authors@R: "First Last <first.last@example.com> [aut, cre]"
-Description: What the package does (paragraph)
+Author: Robert Krzyzanowski <technoguyrob@gmail.com>
+Maintainer: Robert Krzyzanowski <technoguyrob@gmail.com>
+Authors@R: c(person("Robert", "Krzyzanowski",
+    email = "technoguyrob@gmail.com", role = c("aut", "cre")))
+Description: This package intends to go above and beyond of the features
+    provided by the testthat package. Namely, stubbing of functions and methods
+    is provided as well as the ability to architect mock structured hierarchies
+    of files (sometimes called fixtures).
+
+    Intended for any serious R package developer, testthatsomemore aims to
+    raise the caliber of R testing frameworks to that of famous libraries
+    like JUnit and RSpec.
 Depends:
-    R (>= 3.0.2)
-License: What license is it under?
+    R (>= 3.0.0),
+    testthat
+License: MIT
 LazyData: true
 Roxygen: list(wrap = FALSE)
+
