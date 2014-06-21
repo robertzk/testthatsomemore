@@ -3,7 +3,7 @@
 \alias{create_test_files}
 \title{Create a file structure for tests.}
 \usage{
-create_test_files(files, dir)
+create_test_files(files, expr, dir)
 }
 \arguments{
 \item{files}{character or list or NULL. A nested file structure. The names of the
@@ -13,12 +13,19 @@ character (for example, \code{files = c('a','b','c')} will create three
 files with those filenames). By default, \code{files = NULL} in which case
 simply an empty directory will be created.}
 
+\item{expr}{expression. An expression to evaluate within which the files
+should exist, but outside of which the files should be unlinked. If
+missing, the directory of the will be returned. Otherwise, the
+value obtained in this expression will be returned.}
+
 \item{dir}{character. The directory in which to create the files. If
 missing, a temporary directory will be created instead using
 the built-in \code{tempfile()} helper.}
 }
 \value{
-the directory in which this file structure exists.
+the directory in which this file structure exists, if \code{expr}
+   is not missing. If \code{expr} was provided, its return value will be
+   returned instead.
 }
 \description{
 A helper function for creating hierarchical file structures
@@ -33,6 +40,17 @@ do the following:
    file2.r = 'print("Sample R code")'), file3.csv = "a,b,c\n1,2,3"))}
 
 with the return value being a test directory containing these structured files.
+
+An additional feature is that expressions can be evaluated within the scope
+of the hierarchical files existing, with the files getting deleted after
+the expression executes:
+
+\code{create_test_files(list(a = "hello\nworld"),
+  cat(readLines(file.path(tempdir, 'a'))[[2]]))}
+
+The above will print \code{"world"}. (\code{tempdir} is set automatically
+within the scope of the expression to the directory that was created for
+the temporary files.)
 }
 \examples{
 \dontrun{
@@ -43,6 +61,10 @@ with the return value being a test directory containing these structured files.
   test_dir <- create_test_files(list(alphabet = as.list(LETTERS)))
   # Now test_dir is the location of a directory containing a subdirectory
   # 'alphabet' with the files 'A', 'B', ..., 'Z' (all empty).
+
+  test_dir <- create_test_files(list(a = 'hello'), {
+    cat(readLines(file.path(tempdir, 'a')))
+  })
 }
 }
 
