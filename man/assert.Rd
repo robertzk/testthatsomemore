@@ -11,6 +11,8 @@ assert(expr, info)
 \item{info}{character. The error message to display.}
 }
 \description{
-Explicitly state that we expect no errors to occur.
+Note we could simply write the expression itself and let it error,
+but using \code{assert} makes the intention of the code clearer
+(like using \code{base::force}).
 }
 
