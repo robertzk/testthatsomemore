@@ -13,4 +13,9 @@
 #' fn <- function() { cat(paste0('a', 'b')) }
 #' stub(fn, 'paste0') <- function(...) base::paste(...)
 #' fn() # Will print "a b" instead of "ab"
-NULL
+`stub<-` <- function(fn, key, value) {
+  environment(fn) <- new.env(parent = environment(fn)) 
+  assign(key, value, envir = environment(fn))
+  fn
+}
+
