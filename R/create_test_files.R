@@ -83,7 +83,7 @@ create_test_files <- function(files, expr, dir) {
     if (is.list(body)) {
       dir.create(subdir <- file.path(dir, name),
                  showWarnings = FALSE, recursive = TRUE)
-      create_test_files(body, subdir)
+      create_test_files(body, dir = subdir)
     } else writeLines(body %||% '', file.path(dir, name))
   })
 
@@ -92,7 +92,7 @@ create_test_files <- function(files, expr, dir) {
       tempdir <- dir
       expr
     }))
-    unlink(dir)
+    unlink(dir, recursive = TRUE, force = TRUE)
     value
   } else dir
 }

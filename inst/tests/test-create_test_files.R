@@ -12,6 +12,7 @@ local({
   })
 
   test_that('it create an empty directory when NULL is given', {
+    expect_is_directory(create_test_files())
     expect_is_directory(create_test_files(NULL))
   })
 
@@ -41,6 +42,25 @@ local({
   test_that('it writes to a file if the terminal nodes are strings', {
     out <- readLines(file.path(create_test_files(list(a = inn <- "test\nit")), 'a'))
     expect_identical(paste0(out, collapse = "\n"), inn)
+  })
+
+  test_that('it can use a custom directory', {
+    temp_dir <- create_test_files() 
+    create_test_files('a', dir = temp_dir)
+    expect_is_file(file.path(temp_dir, 'a'))
+  })
+
+  test_that('it can execute expressions passed in', {
+    value <- create_test_files(list(a = 'test'), readLines(file.path(tempdir, 'a')))
+    expect_identical(value, 'test',
+      info = paste0('create_test_files should have been able to execute ',
+                    'the passed in expression.'))
+  })
+
+  test_that('it cleans up after using the directory', {
+    dir <- create_test_files()
+    value <- create_test_files(list(a = 'test'), readLines(file.path(tempdir, 'a')), dir)
+    expect_false(file.exists(file.path(dir, 'a')))
   })
 
 })
