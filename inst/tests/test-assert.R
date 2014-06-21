@@ -1,7 +1,7 @@
 context('assert')
 
 local({
-  assert <- assert
+  environment(assert) <- new.env(parent = environment(assert))
   environment(assert)$expect_false <- function(x) if (identical(x, TRUE)) stop()
 
   test_that('it lets no error go through', {
