@@ -9,7 +9,6 @@ Description: This package intends to go above and beyond of the features
     provided by the testthat package. Namely, stubbing of functions and methods
     is provided as well as the ability to architect mock structured hierarchies
     of files (sometimes called fixtures).
-
     Intended for any serious R package developer, testthatsomemore aims to
     raise the caliber of R testing frameworks to that of famous libraries
     like JUnit and RSpec.
@@ -19,4 +18,3 @@ Depends:
 License: MIT
 LazyData: true
 Roxygen: list(wrap = FALSE)
-
