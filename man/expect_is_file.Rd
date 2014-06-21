@@ -12,10 +12,6 @@ expect_is_directory(potential_filepath, ...)
 \item{potential_filepath}{character. The name of the file path to check.}
 
 \item{...}{additional arguments to pass to \code{expect_true}.}
-
-\item{potential_path}{character. The name of the path to check.}
-
-\item{...}{additional arguments to pass to \code{expect_true}.}
 }
 \value{
 TRUE or FALSE according as \code{potential_filepath} is or is not

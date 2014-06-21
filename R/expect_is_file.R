@@ -19,8 +19,6 @@ expect_is_file <- function(potential_filepath, ...) {
 #' Return an error if a string represents an existent directory.
 #'
 #' @rdname expect_is_file
-#' @param potential_path character. The name of the path to check.
-#' @param ... additional arguments to pass to \code{expect_true}.
 #' @export 
 #' @return TRUE or FALSE according as \code{potential_path} is or is not
 #'   a directory. 
