@@ -12,16 +12,33 @@
 #'
 #' with the return value being a test directory containing these structured files.
 #'
+#' An additional feature is that expressions can be evaluated within the scope
+#' of the hierarchical files existing, with the files getting deleted after
+#' the expression executes:
+#'
+#' \code{create_test_files(list(a = "hello\nworld"),
+#'   cat(readLines(file.path(tempdir, 'a'))[[2]]))}
+#'
+#' The above will print \code{"world"}. (\code{tempdir} is set automatically
+#' within the scope of the expression to the directory that was created for
+#' the temporary files.)
+#'
 #' @param files character or list or NULL. A nested file structure. The names of the
 #'    list will decide the names of the files, and the terminal nodes should be
 #'    strings which will populate the file bodies. One can also specify a
 #'    character (for example, \code{files = c('a','b','c')} will create three
 #'    files with those filenames). By default, \code{files = NULL} in which case
 #'    simply an empty directory will be created.
+#' @param expr expression. An expression to evaluate within which the files
+#'    should exist, but outside of which the files should be unlinked. If
+#'    missing, the directory of the will be returned. Otherwise, the
+#'    value obtained in this expression will be returned.
 #' @param dir character. The directory in which to create the files. If
 #'    missing, a temporary directory will be created instead using
 #'    the built-in \code{tempfile()} helper.
-#' @return the directory in which this file structure exists.
+#' @return the directory in which this file structure exists, if \code{expr}
+#'    is not missing. If \code{expr} was provided, its return value will be
+#'    returned instead.
 #' @export
 #' @examples
 #' \dontrun{
@@ -32,8 +49,12 @@
 #'   test_dir <- create_test_files(list(alphabet = as.list(LETTERS)))
 #'   # Now test_dir is the location of a directory containing a subdirectory
 #'   # 'alphabet' with the files 'A', 'B', ..., 'Z' (all empty).
+#'
+#'   test_dir <- create_test_files(list(a = 'hello'), {
+#'     cat(readLines(file.path(tempdir, 'a')))
+#'   })
 #' }
-create_test_files <- function(files, dir) {
+create_test_files <- function(files, expr, dir) {
   if (missing(files)) files <- NULL
   files <- as.list(files)
 
@@ -66,6 +87,13 @@ create_test_files <- function(files, dir) {
     } else writeLines(body %||% '', file.path(dir, name))
   })
 
-  dir
+  if (!missing(expr)) {
+    value <- eval.parent(substitute({
+      tempdir <- dir
+      expr
+    }))
+    unlink(dir)
+    value
+  } else dir
 }
 
