@@ -11,3 +11,10 @@ test_that('stubbing works on a simple example using a string key', {
   stub(fn, 'x') <- 1
   expect_identical(fn(), 1)
 })
+
+test_that('the character.only arguments overrides non-standard evaluation', {
+  fn <- function() x
+  name <- 'x'
+  stub(fn, name, character.only = TRUE) <- 1
+  expect_identical(fn(), 1)
+})

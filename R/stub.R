@@ -27,7 +27,7 @@
 `stub<-` <- function(fn, key, character.only = FALSE, value) {
   environment(fn) <- new.env(parent = environment(fn)) 
   # If key is a string, use that, otherwise deparse and substitute.
-  key <- if (character_only || is.element(substring(tmp <-
+  key <- if (character.only || is.element(substring(tmp <-
     deparse(substitute(key)), 1, 1), c("'", '"'))) key else tmp
   assign(key, value, envir = environment(fn))
   fn
