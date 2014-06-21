@@ -1,0 +1,23 @@
+language: c
+before_install:
+- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+- chmod 755 ./travis-tool.sh
+- ./travis-tool.sh bootstrap
+install:
+- ./travis-tool.sh install_deps
+- ./travis-tool.sh install_r testthat
+script: ./travis-tool.sh run_tests
+after_failure:
+- ./travis-tool.sh dump_logs
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+  hipchat:
+    rooms:
+      secure: I4ksETHOabgxgYzrSitJ+fONnv6MXX44QYBme6se664biWF8zEuu8rOzdN4vlyfG3SJFTldN2NfVdtJBKhpjyYfxFQuGy37Yd2EPQyFQ9STFlASD8WXWPpSVYWgdPjXkbz1QezqGiUHjaP/H+7+6MNVolYZkGL4wrMnENiR36Lg=
+    on_success: change
+    on_failure: change
+    template:
+    - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
+      | Details: %{build_url} | Changes: %{compare_url}'

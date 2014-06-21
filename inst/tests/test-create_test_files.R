@@ -33,12 +33,14 @@ local({
                       '" should have been created'))
   })
 
-  test_that('it creates a directory with two empty file if two characters are passed', {
-    dir <- create_test_files(files <- c('a','b'))
-    for (file in files) 
-      expect_is_empty_file(file.path(dir, file),
-        info = paste0('A directory with a single empty file named "', file,
-                      '" should have been created'))
+  test_that('it creates a nested directory structure', {
+    dir <- create_test_files(list(a = list(b = list(c = list('d')))))
+    expect_is_empty_file(file.path(dir, 'a', 'b', 'c', 'd'))
+  })
+
+  test_that('it writes to a file if the terminal nodes are strings', {
+    out <- readLines(file.path(create_test_files(list(a = inn <- "test\nit")), 'a'))
+    expect_identical(paste0(out, collapse = "\n"), inn)
   })
 
 })
