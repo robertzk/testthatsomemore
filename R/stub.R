@@ -15,6 +15,7 @@
 #'    evaluation for \code{key} if set to \code{TRUE}. The default is
 #'    \code{FALSE}.
 #' @param value ANY. The new value of the stubbed key.
+#' @export
 #' @examples
 #' fn <- function() { cat(paste0('a', 'b')) }
 #' stub(fn, 'paste0') <- function(...) base::paste(...)
