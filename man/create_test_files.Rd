@@ -3,22 +3,29 @@
 \alias{create_test_files}
 \title{Create a file structure for tests.}
 \usage{
-create_test_files(files)
+create_test_files(files, dir)
 }
 \arguments{
 \item{files}{list. A nested file structure. The names of the list will decide
 the names of the files, and the terminal nodes should be strings which
 will populate the file bodies.}
+
+\item{dir}{character. The directory in which to create the files. If
+missing, a temporary directory will be created instead using
+the built-in \code{tempfile()} helper.}
 }
 \value{
 the directory in which this file structure exists.
 }
 \description{
+A helper function for creating hierarchical file structures
+when, e.g., testing functions which rely on presence of files.
+}
+\details{
 For example, when files need to be present for a function we are testing,
 it would be very cumbersome to create these files manually. Instead, we can
 do the following:
-}
-\details{
+
 \code{test_dir <- create_test_files(list(dir1 = list('file1',
    file2.r = 'print("Sample R code")'), file3.csv = "a,b,c\n1,2,3"))}
 
@@ -29,8 +36,12 @@ in the calling environment that will unlink everything in this test directory.
 \examples{
 \dontrun{
   test_dir <- create_test_files(list(test = 'blah', 'test2'))
-  # Now test_dir is the name of a directory containing a file 'test'
+  # Now test_dir is the location of a directory containing a file 'test'
   # with the string 'blah' and an empty file 'test2'.
+
+  test_dir <- create_test_files(list(alphabet = as.list(LETTERS)))
+  # Now test_dir is the location of a directory containing a subdirectory
+  # 'alphabet' with the files 'A', 'B', ..., 'Z' (all empty).
 }
 }
 
