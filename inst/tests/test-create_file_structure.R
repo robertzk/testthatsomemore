@@ -63,5 +63,17 @@ local({
     expect_false(file.exists(file.path(dir, 'a')))
   })
 
+  test_that('within_file_structure behaves like create_file_structure', {
+    value <- within_file_structure(list(a = 'test'), readLines(file.path(tempdir, 'a')))
+    expect_identical(value, 'test',
+      info = paste0('within_file_structure should have been able to execute ',
+                    'the passed in expression.'))
+  })
+
+  test_that('within_file_structure errors if no expression is passed in', {
+    expect_error(within_file_structure(list(a = 'test')),
+                 'You must provide an expression to evaluate')
+  })
+
 })
 
