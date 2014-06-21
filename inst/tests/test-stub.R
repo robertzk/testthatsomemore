@@ -18,3 +18,4 @@ test_that('the character.only arguments overrides non-standard evaluation', {
   stub(fn, name, character.only = TRUE) <- 1
   expect_identical(fn(), 1)
 })
+

@@ -1,8 +1,7 @@
 context('expect_is_directory')
 
 local({
-  environment(expect_is_directory) <- new.env(parent = environment(expect_is_directory))
-  environment(expect_is_directory)$expect_true <- stopifnot
+  stub(expect_is_directory, expect_true) <- stopifnot
 
   test_that('it returns an error on a non-character', {
     expect_error(expect_is_directory(5))
