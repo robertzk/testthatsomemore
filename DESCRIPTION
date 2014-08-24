@@ -17,4 +17,5 @@ Depends:
     testthat
 License: MIT + file LICENSE
 LazyData: true
+URL: http://github.com/robertzk/testthatsomemore
 Roxygen: list(wrap = FALSE)
