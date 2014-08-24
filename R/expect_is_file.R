@@ -6,10 +6,9 @@
 #' @return TRUE or FALSE according as \code{potential_filepath} is or is not
 #'   a file.
 #' @examples
-#' \dontrun{
-#' expect_is_file('not/a/file') # will error
-#' expect_is_file(tempfile()) # will not error
-#' }
+#' expect_error(expect_is_file('not/a/file')) # will error
+#' tmp <- tempfile(); writeLines('', tmp)
+#' expect_is_file(tmp) # will not error
 expect_is_file <- function(potential_filepath, ...) {
   expect_true(is.character(potential_filepath) &&
               length(potential_filepath) == 1 &&

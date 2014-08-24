@@ -102,12 +102,11 @@ create_file_structure <- function(files, expr, dir) {
 #' @rdname create_file_structure
 #' @export
 #' @examples
-#' \dontrun{
-#'   within_file_structure(list(a = 'hello'), {
-#'     cat(readLines(file.path(tempdir, 'a')))
-#'   }) # will create a directory with a file named "a" containing the string
-#'      # 'hello', print it by reading the file, and then unlink the directory
-#' }
+#' expect_output(within_file_structure(list(a = 'hello'), {
+#'   cat(readLines(file.path(tempdir, 'a')))
+#' }), 'hello')
+#' # The above will create a directory with a file named "a" containing the string
+#' # 'hello', print it by reading the file, and then unlink the directory.
 within_file_structure <- function(files, expr, dir) {
   if (missing(expr))
     stop("You must provide an expression to evaluate for ",

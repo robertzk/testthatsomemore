@@ -1,7 +1,10 @@
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
+#' Check whether a path is a directory.
+#'
+#' @param path character. The name of the path.
 #' @export
-is.directory <- function(x) file.exists(x) && file.info(x)$isdir
+is.directory <- function(path) file.exists(path) && file.info(path)$isdir
 
 #' Touch a file.
 #'
