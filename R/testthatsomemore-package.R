@@ -19,4 +19,5 @@
 #'
 #' @docType package
 #' @name testthatsomemore
+#' @import testthat
 NULL
