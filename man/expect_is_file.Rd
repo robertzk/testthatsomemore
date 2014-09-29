@@ -26,6 +26,7 @@ Return an error if a string represents an existent file.
 Return an error if a string represents an existent directory.
 }
 \examples{
+library(testthat)
 expect_error(expect_is_file('not/a/file')) # will error
 tmp <- tempfile(); writeLines('', tmp)
 expect_is_file(tmp) # will not error

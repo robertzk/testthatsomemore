@@ -59,6 +59,7 @@ the temporary files.)
 }
 \examples{
 \dontrun{
+  library(testthat)
   test_dir <- create_file_structure(list(test = 'blah', 'test2'))
   # Now test_dir is the location of a directory containing a file 'test'
   # with the string 'blah' and an empty file 'test2'.
@@ -71,6 +72,7 @@ the temporary files.)
     cat(readLines(file.path(tempdir, 'a')))
   })
 }
+library(testthat)
 expect_output(within_file_structure(list(a = 'hello'), {
   cat(readLines(file.path(tempdir, 'a')))
 }), 'hello')

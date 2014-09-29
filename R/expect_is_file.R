@@ -6,6 +6,7 @@
 #' @return TRUE or FALSE according as \code{potential_filepath} is or is not
 #'   a file.
 #' @examples
+#' library(testthat)
 #' expect_error(expect_is_file('not/a/file')) # will error
 #' tmp <- tempfile(); writeLines('', tmp)
 #' expect_is_file(tmp) # will not error
