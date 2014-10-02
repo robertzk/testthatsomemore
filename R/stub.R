@@ -45,6 +45,7 @@
 #' @param stubbed_value function. The function to temporarily replace this function with.
 #' @param expr expression. An expression to evaluate with the stubbed changes.
 #'   The stubbing will be reverted after this expression is executed.
+#' @export
 #' @examples
 #' package_stub("methods", "new", function(...) 'test', stopifnot(new('example') == 'test')) 
 package_stub <- function(package_name, function_name, stubbed_value, expr) {
