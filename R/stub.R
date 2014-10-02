@@ -34,3 +34,23 @@
   fn
 }
 
+#' Stub a function in a package by replacing it with something else.
+#'
+#' Stubbing a function in a package can only be done in the context of
+#' some expression (a block of code). Otherwise, dangerous things could happen!
+#' (We are actually replacing the function in the package's namespace.)
+#'
+#' @param package_name character. The name of the package to look in.
+#' @param function_name character. The name of the function to stub.
+#' @param stubbed_value function. The function to temporarily replace this function with.
+#' @param expr expression. An expression to evaluate with the stubbed changes.
+#'   The stubbing will be reverted after this expression is executed.
+#' @examples
+#' package_stub("methods", "new", function(...) 'test', stopifnot(new('example') == 'test')) 
+package_stub <- function(package_name, function_name, stubbed_value, expr) {
+  if (!is.element(package_name, installed.packages()[,1]))
+    stop(gettextf("Could not find package %s for stubbing %s",
+                  sQuote(package_name), dQuote(function_name)))
+
+}
+
