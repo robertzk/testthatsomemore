@@ -19,3 +19,4 @@ test_that('it errors when stubbing a non-existent method', {
 test_that('it can stub methods::new', {
   expect_equal(package_stub("methods", "new", function(...) 'test', new('hello')), 'test')
 })
+

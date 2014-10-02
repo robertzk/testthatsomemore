@@ -57,23 +57,28 @@ package_stub <- function(package_name, function_name, stubbed_value, expr) {
     warning(gettextf("Stubbing %s::%s with a %s instead of a function",
             package_name, function_name, sQuote(class(stubbed_value)[1])))
 
-  namespace <- as.environment(paste0('package:', package_name))
-  if (!exists(function_name, envir = namespace, inherits = FALSE))
-    namespace <- getNamespace(package_name)
-  if (!exists(function_name, envir = namespace, inherits = FALSE))
+  namespaces 
+    list(as.environment(paste0('package:', package_name)),
+         getNamespace(package_name))
+  if (!exists(function_name, envir = namespaces[[1]], inherits = FALSE))
+    namespaces <- namespaces[-1]
+  if (!exists(function_name, envir = tail(namespaces,1)[[1]], inherits = FALSE))
     stop(gettextf("Cannot stub %s::%s because it must exist in the package",
          package_name, function_name))
 
-  unlockBinding(function_name, namespace)
+  lapply(namespaces, unlockBinding, sym = function_name)
 
   # Clean up our stubbing on exit
-  previous_object <- get(function_name, envir = namespace)
+  previous_object <- get(function_name, envir = tail(namespaces,1)[[1]])
   on.exit({
-    assign(function_name, previous_object, envir = namespace)
-    lockBinding(function_name, namespace)
+    lapply(namespaces, function(ns) {
+      assign(function_name, previous_object, envir = ns)
+      lockBinding(function_name, ns)
+    })
   })
 
-  assign(function_name, stubbed_value, envir = namespace)
+  lapply(namespaces, function(ns)
+    assign(function_name, stubbed_value, envir = ns))
   eval.parent(substitute(expr))
 }
 
