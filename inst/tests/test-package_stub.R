@@ -20,4 +20,8 @@ test_that('it can stub methods::new', {
   expect_equal(package_stub("methods", "new", function(...) 'test', new('hello')), 'test')
 })
 
+test_that('it restores methods::new after stubbing', {
+  package_stub("methods", "new", function(...) 'test', new('hello'))
+  expect_true(length(formals(methods::new)) > 1)
+})
 
