@@ -72,7 +72,7 @@ package_stub <- function(package_name, function_name, stubbed_value, expr) {
   previous_object <- get(function_name, envir = tail(namespaces,1)[[1]])
   on.exit({
     lapply(namespaces, function(ns) {
-      assign(function_name, previous_object, envir = ns)
+      tryCatch(error = function(.) NULL, assign(function_name, previous_object, envir = ns))
       lockBinding(function_name, ns)
     })
   })

@@ -25,3 +25,8 @@ test_that('it restores methods::new after stubbing', {
   expect_true(length(formals(methods::new)) > 1)
 })
 
+test_that('it restores base::saveRDS after stubbing', {
+  package_stub("base", "saveRDS", function(...) 'test', saveRDS('ok'))
+  expect_true(length(formals(base::saveRDS)) > 1)
+})
+
