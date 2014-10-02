@@ -54,11 +54,26 @@ package_stub <- function(package_name, function_name, stubbed_value, expr) {
                   sQuote(package_name), dQuote(function_name)))
   stopifnot(is.character(function_name))
   if (!is.function(stubbed_value))
-    warning("Stubbing %s::%s with a %s instead of a function",
-            package_name, function_name, sQuote(class(stubbed_value)[1]))
+    warning(gettextf("Stubbing %s::%s with a %s instead of a function",
+            package_name, function_name, sQuote(class(stubbed_value)[1])))
 
-  namespace <- getNamespace(package_name)
+  namespace <- as.environment(paste0('package:', package_name))
+  if (!exists(function_name, envir = namespace, inherits = FALSE))
+    namespace <- getNamespace(package_name)
+  if (!exists(function_name, envir = namespace, inherits = FALSE))
+    stop(gettextf("Cannot stub %s::%s because it must exist in the package",
+         package_name, function_name))
+
   unlockBinding(function_name, namespace)
 
+  # Clean up our stubbing on exit
+  previous_object <- get(function_name, envir = namespace)
+  on.exit({
+    assign(function_name, previous_object, envir = namespace)
+    lockBinding(function_name, namespace)
+  })
+
+  assign(function_name, stubbed_value, envir = namespace)
+  eval.parent(substitute(expr))
 }
 
