@@ -57,7 +57,7 @@ package_stub <- function(package_name, function_name, stubbed_value, expr) {
     warning(gettextf("Stubbing %s::%s with a %s instead of a function",
             package_name, function_name, sQuote(class(stubbed_value)[1])))
 
-  namespaces 
+  namespaces <-
     list(as.environment(paste0('package:', package_name)),
          getNamespace(package_name))
   if (!exists(function_name, envir = namespaces[[1]], inherits = FALSE))
