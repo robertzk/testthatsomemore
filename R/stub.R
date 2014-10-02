@@ -51,6 +51,13 @@ package_stub <- function(package_name, function_name, stubbed_value, expr) {
   if (!is.element(package_name, installed.packages()[,1]))
     stop(gettextf("Could not find package %s for stubbing %s",
                   sQuote(package_name), dQuote(function_name)))
+  stopifnot(is.character(function_name))
+  if (!is.function(stubbed_value))
+    warning("Stubbing %s::%s with a %s instead of a function",
+            package_name, function_name, sQuote(class(stubbed_value)[1]))
+
+  namespace <- getNamespace(package_name)
+  unlockBinding(function_name, namespace)
 
 }
 
