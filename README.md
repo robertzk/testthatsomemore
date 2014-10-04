@@ -6,6 +6,7 @@ in the R-sphere, but there are still some features lacking. `testthatsomemore` p
 
   * The ability to mock and stub functions and closures, including those in packages.
   * Creation of hierarchical file structures for testing of IO-related functions.
+  * Indicating that some tests are pending.
 
 To use, simply run:
 
@@ -91,3 +92,19 @@ test_that('it can stub away stats::lm!', {
   })
 })
 ```
+
+Pending
+-------
+
+Keeping in line with test-driven development, we should be able to denote
+that a test is "pending" completion. If you use testthat with the default
+reporter (think lines of green dots), the `pending` function will display
+a yellow dot to indicate it must still be implemented.
+
+```R
+test_that('i have to write this test', {
+  pending()
+})
+```
+
+![pending](inst/images/pending.png)
