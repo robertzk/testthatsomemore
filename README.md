@@ -110,5 +110,5 @@ test_that('i have to write this test', {
 ![pending](inst/images/pending.png)
 
 ```
-                 ^ pending
+               ^ pending
 ```                    
