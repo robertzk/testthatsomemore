@@ -31,7 +31,7 @@ some of the functionality to avoid unnecessary action. For example, when
 testing a function that trains an algorithm over an extended period of time,
 it would be helpful to skip the computationally expensive step and ensure
 the rest of the code is working as expected. We can use testthatsomemore
-in our tests as follows. Image we have a function as below.
+in our tests as follows. Imagine we have a function as below.
 
 ```R
 complicated_function <- function() {
@@ -56,7 +56,7 @@ test_that("it does what it's supposed to do", {
 Mocking file structures
 -----------
 
-On other occassions, your R package may expect certain files to be present
+On other occasions, your R package may expect certain files to be present
 on the file system. For example, imagine you are writing [a package](https://github.com/HenrikBengtsson/R.batch) that processes
 batch jobs by moving files in a folder called "available" to a folder called "completed".
 These jobs are represented in some simple text format. You could then test your
