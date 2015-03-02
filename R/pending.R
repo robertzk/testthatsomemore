@@ -4,7 +4,9 @@
 #' reporter in the testthat package (see \code{testthat:::find_reporter}).
 #' Using this function in a test also makes it explicitly clear that it
 #' should be implemented shortly.
+#'
+#' @importFrom crayon yellow
 #' @export
 pending <- function() {
-  cat(testthat:::colourise('.', 'yellow'))
+  cat(crayon::yellow('.'))
 }
