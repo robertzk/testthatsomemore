@@ -1,4 +1,4 @@
-Extended Testing Framework for R [![Build Status](https://travis-ci.org/robertzk/testthatsomemore.svg?branch=master)](https://travis-ci.org/robertzk/testthatsomemore.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/robertzk/testthatsomemore/badge.png?branch=master)](https://coveralls.io/r/robertzk/testthatsomemore?branch=master)
+Extended Testing Framework for R [![Build Status](https://travis-ci.org/robertzk/testthatsomemore.svg?branch=master)](https://travis-ci.org/robertzk/testthatsomemore) [![Coverage Status](https://coveralls.io/repos/robertzk/testthatsomemore/badge.png?branch=master)](https://coveralls.io/r/robertzk/testthatsomemore?branch=master)
 =========
 
 Hadley's [testthat](https://github.com/hadley/testthat) revolutionized package development
