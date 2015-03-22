@@ -18,12 +18,12 @@
 #' @export
 #' @examples
 #' fn <- function() { cat(paste0('a', 'b')) }
-#' stub(fn, 'paste0') <- function(...) base::paste(...)
+#' stub(fn, 'paste0') <- paste
 #' fn() # Will print "a b" instead of "ab"
-#' stub(fn, paste0) <- function(...) base::paste(...) # This also works.
+#' stub(fn, paste0) <- paste # This also works.
 #'
 #' stubbed_key <- 'paste0'
-#' stub(fn, stubbed_key, character.only = TRUE) <- function(...) base::paste(...)
+#' stub(fn, stubbed_key, character.only = TRUE) <- paste
 #' # We need to use character.only = TRUE for the above meta-programming to work
 `stub<-` <- function(fn, key, character.only = FALSE, value) {
   environment(fn) <- new.env(parent = environment(fn)) 
