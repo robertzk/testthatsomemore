@@ -1,2 +1,3 @@
 library(testthat)
-test_package("testthatsomemore")
+library(testthatsomemore)
+test_check("testthatsomemore")
