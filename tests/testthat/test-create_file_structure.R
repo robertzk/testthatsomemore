@@ -75,5 +75,9 @@ local({
                  'You must provide an expression to evaluate')
   })
 
+  test_that("it errors when a non-list, NULL, or character is provided as a file body", {
+    expect_error(within_file_structure(list(a = 1), { 1 }), "Only NULL")
+  })
+
 })
 
