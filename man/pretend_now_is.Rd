@@ -36,4 +36,14 @@ such as:
 These are translated into \code{Sys.time() + as.difftime(number, units = unit)}
 (or \code{-} in the case of "ago").
 }
+\examples{
+pretend_now_is(Sys.time() + as.difftime(1, units = "days"), {
+ cat("It's ", Sys.time(), ", tomorrow!")
+})
+
+now <- Sys.time()
+pretend_now_is("10 minutes from now", {
+  stopifnot(as.difftime(Sys.time() - now, units = "minutes") == 10)
+})
+}
 
