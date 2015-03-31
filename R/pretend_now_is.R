@@ -101,7 +101,7 @@ legal_unit_number_pair <- function(unit, number) {
 
 extract_time <- function(matches, time) {
   setNames(nm = c("number", "unit", "tense"),
-    Map(substring, time, s <- attr(matches,"capture.start"),
+    Map(substring, time, s <- attr(matches, "capture.start"),
         s + attr(matches, "capture.length") - 1)
   )
 }
