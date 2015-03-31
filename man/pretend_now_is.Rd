@@ -43,7 +43,9 @@ pretend_now_is(Sys.time() + as.difftime(1, units = "days"), {
 
 now <- Sys.time()
 pretend_now_is("10 minutes from now", {
-  stopifnot(as.difftime(Sys.time() - now, units = "minutes") == 10)
+  stopifnot(all.equal(
+   as.integer(as.difftime(Sys.time() - now, units = "minutes")),
+   10))
 })
 }
 
