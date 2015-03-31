@@ -1,4 +1,8 @@
-# Version 0.2
+# Version 0.2.2
+
+  * Added the `pretend_now_is` time-stubbing helper.
+
+# Version 0.2.0
 
   * Can now stub methods coming from packages. For example,
     `package_stub("methods", "new", function(...) 'test', new('hello'))`
