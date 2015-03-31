@@ -6,6 +6,7 @@ in the R-sphere, but there are still some features lacking. `testthatsomemore` p
 
   * The ability to mock and stub functions and closures, including those in packages.
   * Creation of hierarchical file structures for testing of IO-related functions.
+  * Pretending now is some other time, like Ruby's [Timecop gem](https://github.com/travisjeffery/timecop).
   * Indicating that some tests are pending.
 
 To use, simply run:
@@ -90,6 +91,24 @@ test_that('it can stub away stats::lm!', {
     # a stubbed function. It will be restored when this test is over.
     expect_identical(lm(Sepal.Width ~ Sepal.Height, iris), "I'm a model")
   })
+})
+```
+
+Pretend now is some other time
+-------------
+
+For some tests, we may want to temporarily stub the current timestamp to be
+something else. For example, if we would like to test that our package can
+store the last time it has given the user a helpful tip, and only re-show
+that tip once every month, we could use the `pretend_now_is` helper function.
+
+```R
+expect_output(show_tip(), "helpful tip") # Or some message you wrote.
+expect_output(show_tip(), "") # No output the second time! Too soon.
+pretend_now_is("2 months from now", {
+  # We can use English. Any combination of <number> <time>s <from now/ago>
+  # will work, e.g., "5 seconds from now", "3 months ago", etc.
+  expect_output(show_tip(), "helpful tip")
 })
 ```
 
