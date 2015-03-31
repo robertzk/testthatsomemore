@@ -26,7 +26,7 @@
 #' @export
 #' @examples
 #' pretend_now_is(Sys.time() + as.difftime(1, units = "days"), {
-#'  cat("It's ", Sys.time(), ", tomorrow!")
+#'  cat("It's UNIX time ", Sys.time(), ", tomorrow!\n", sep = "")
 #' })
 #'
 #' now <- Sys.time()
