@@ -62,7 +62,7 @@ parse_time.character <- function(time) {
   stopifnot(length(time) == 1)
 
   # http://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/
-  regex <- "^[[:space:]]*([[:digit:]]+)[[:space:]]*([[:alpha:]]+)[[:space:]]*(from now|ago)[[:space:]]*"
+  regex <- "[[:space:]]*([[:digit:]]+)[[:space:]]*([[:alpha:]]+)[[:space:]]*(from now|ago)[[:space:]]*"
 
   matches <- regexpr(regex, time, perl = TRUE, ignore.case = TRUE)
   list2env(extract_time(matches, time), environment())
