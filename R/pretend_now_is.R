@@ -24,4 +24,60 @@
 #'   the current time is \code{time}.
 #' @return the value of \code{expr}.
 pretend_now_is <- function(time, expr) {
+  current_time <- Sys.time()
+
+  time <- parse_time(time)
+
+  # package_stub("base", "Sys.Date", function() { 
 }
+
+parse_time <- function(time) {
+  UseMethod("parse_time")
+}
+
+parse_time.POSIXct <- function(time) {
+  time
+}
+
+parse_time.Date <- function(time) {
+  as.POSIXct(time)
+}
+
+parse_time.character <- function(time) {
+  stopifnot(length(time) == 1)
+
+  # http://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/
+  regex <- "^[[:space:]]*([[:digit:]]+)[[:space:]]*([[:alpha:]]+)[[:space:]]*(from now|ago)[[:space:]]*"
+
+  matches <- regexpr(regex, time, perl = TRUE, ignore.case = TRUE)
+  list2env(extract_time(matches, time), environment())
+
+  number <- as.integer(number)
+  unit   <- normalize_unit(tolower(unit))
+  op     <- if (tolower(tense) == "from now") `+` else `-`
+
+  op(Sys.time(), as.difftime(number, units = unit))
+}
+
+normalize_unit <- function(unit) {
+  if (substring(unit, nchar(unit)) != "s") {
+    unit <- paste0(unit, "s")
+  }
+
+  if (unit == "seconds") "secs"
+  else unit
+}
+
+extract_time <- function(matches, time) {
+  setNames(nm = c("number", "unit", "tense"),
+    Map(substring, text, s <- attr(matches,"capture.start"),
+        s + attr(matches, "capture.length") - 1)
+  )
+}
+
+parse_time.default <- function(time) {
+  stop("Time provided to ", crayon::red("testthatsomemore::pretend_now_is"),
+       "is in an invalid format. Must be a ", sQuote("POSIXct"), ", ",
+       sQuote("Date"), ", or ", sQuote("character"), ".", call. = FALSE)
+}
+
