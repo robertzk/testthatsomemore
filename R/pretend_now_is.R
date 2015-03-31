@@ -65,6 +65,10 @@ parse_time.character <- function(time) {
   regex <- "[[:space:]]*([[:digit:]]+)[[:space:]]*([[:alpha:]]+)[[:space:]]*(from now|ago)[[:space:]]*"
 
   matches <- regexpr(regex, time, perl = TRUE, ignore.case = TRUE)
+  if (matches == -1) {
+    stop("testthatsome::pretend_now_is: Could not parse ",
+         sQuote(time), " into a time.", call. = FALSE)
+  }
   list2env(extract_time(matches, time), environment())
 
   number <- as.integer(number)

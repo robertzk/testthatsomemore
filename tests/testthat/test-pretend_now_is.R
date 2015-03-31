@@ -1,6 +1,16 @@
 context("pretend_now_is")
 
 describe("parse_time", {
+  describe("invalid inputs", {
+    test_that("it errors when an invalid time format is given", {
+      expect_error(parse_time(10), "invalid format")
+    })
+
+    test_that("it errors on invalid character inputs", {
+      expect_error(parse_time("foo seconds ago"), "Could not parse")
+    })
+  })
+
   test_that("it leaves POSIXct alone", {
     expect_equal(parse_time(Sys.time()), Sys.time())
   })
@@ -19,7 +29,6 @@ describe("parse_time", {
         info = sprintf("%s did not parse correctly", sQuote(string)), tolerance = 0.1)
     })
   })
-    e git add "$(git rev-parse --show-toplevel)"; git commit -m "add pretend_now_is examples"; git push -q origin `git rev-parse --abbrev-ref HEAD` &
 })
 
 describe("pretend_now_is", {
@@ -35,6 +44,7 @@ describe("pretend_now_is", {
     pretend_now_is("1 day from now", expect_equal(Sys.time(), tomorrow))
   })
 
+  test_that("it can pretend it's 5 seconds ago", {
     now        <- Sys.time()
     five_s_ago <- now - as.difftime(5, units = "secs")
     pretend_now_is("5 seconds ago", expect_equal(Sys.time(), five_s_ago))
@@ -61,4 +71,3 @@ describe("pretend_now_is", {
     })
   })
 })
-
