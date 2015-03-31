@@ -10,19 +10,55 @@ describe("parse_time", {
   })
 
   test_that("it can parse every format in the world", {
-    grid <- expand.grid(1:10, c("day", "days", "second", "secs", "month", "years"), c("+", "-"))
+    grid <- expand.grid(1:10, c("day", "days", "second", "secs", "minutes", "month", "years", "eons"), c("+", "-"))
     apply(grid, 1, function(row) {
       string <- sprintf("%s %s %s", row[1], row[2], if (row[3] == "+") "from now" else "ago")
       list2env(legal_unit_number_pair(normalize_unit(row[2]), as.integer(row[1])), environment())
       expect_equal(parse_time(string), 
         getFunction(row[3])(Sys.time(), as.difftime(number, units = unit)),
-        info = sprintf("%s did not parse correctly", sQuote(string)), tolerance = 0.01)
+        info = sprintf("%s did not parse correctly", sQuote(string)), tolerance = 0.1)
     })
   })
 })
 
-test_that("it is able to pretend now is a day from today", {
-  now      <- Sys.time()
-  tomorrow <- now + as.difftime(1, units = "days")
-  pretend_now_is(tomorrow, expect_equal(Sys.time(), tomorrow))
+describe("pretend_now_is", {
+  test_that("it is able to pretend now is a day from today", {
+    now      <- Sys.time()
+    tomorrow <- now + as.difftime(1, units = "days")
+    pretend_now_is(tomorrow, expect_equal(Sys.time(), tomorrow))
+  })
+
+  test_that("it is able to pretend now is a day from today using character notation", {
+    now      <- Sys.time()
+    tomorrow <- now + as.difftime(1, units = "days")
+    pretend_now_is("1 day from now", expect_equal(Sys.time(), tomorrow))
+  })
+
+  test_that("it can pretend it's 5 seconds ago", {
+    now        <- Sys.time()
+    five_s_ago <- now - as.difftime(5, units = "secs")
+    pretend_now_is("5 seconds ago", expect_equal(Sys.time(), five_s_ago))
+  })
+
+  test_that("it can pretend date is different", {
+    tomorrow_date <- as.Date(Sys.Date() + as.difftime(1, units = "days"))
+    pretend_now_is("1 day from now", {
+      expect_equal(Sys.Date(), tomorrow_date)
+    })
+  })
+
+  test_that("it can pretend date is different", {
+    tomorrow_date <- as.Date(Sys.Date() + as.difftime(1, units = "days"))
+    pretend_now_is("1 day from now", {
+      expect_equal(Sys.Date(), tomorrow_date)
+    })
+  })
+
+  test_that("it can pretend date is different", {
+    tomorrow_time <- Sys.time() + as.difftime(1, units = "days")
+    pretend_now_is("1 day from now", {
+      expect_equal(date(), format(tomorrow_time, "%a %b %d %H:%M:%S %Y"))
+    })
+  })
 })
+

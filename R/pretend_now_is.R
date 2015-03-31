@@ -23,12 +23,27 @@
 #' @param expr expression. The expression to evaluate while pretending
 #'   the current time is \code{time}.
 #' @return the value of \code{expr}.
+#' @export
+#' @examples
+#' pretend_now_is(Sys.time() + as.difftime(1, units = "days"), {
+#'  cat("It's ", Sys.time(), ", tomorrow!")
+#' })
+#'
+#' now <- Sys.time()
+#' pretend_now_is("10 minutes from now", {
+#'   stopifnot(as.difftime(Sys.time() - now, units = "minutes") == 10)
+#' })
 pretend_now_is <- function(time, expr) {
   current_time <- Sys.time()
 
   time <- parse_time(time)
 
-  # package_stub("base", "Sys.Date", function() { 
+  eval.parent(substitute({
+    package_stub("base", "Sys.Date", function() as.Date(time),
+    package_stub("base", "date", function() format(time, "%a %b %d %H:%M:%S %Y"),
+    package_stub("base", "Sys.time", function() time, {
+      expr
+  })))}))
 }
 
 parse_time <- function(time) {
@@ -66,6 +81,7 @@ normalize_unit <- function(unit) {
   }
 
   if (unit == "seconds") "secs"
+  else if (unit == "minutes") "mins"
   else unit
 }
 
