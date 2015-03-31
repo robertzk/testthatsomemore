@@ -24,7 +24,7 @@ value for use in unit tests.
 }
 \details{
 Either a \code{\link{Date}} or \code{\link{POSIXct}} object can be
-provided, or an English string in the form "<number> <unit>s <from now/agO>"
+provided, or an English string in the form "<number> <unit>s <from now/ago>"
 such as:
 
 \itemize{

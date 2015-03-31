@@ -5,7 +5,7 @@
 #' value for use in unit tests.
 #'
 #' Either a \code{\link{Date}} or \code{\link{POSIXct}} object can be
-#' provided, or an English string in the form "<number> <unit>s <from now/agO>"
+#' provided, or an English string in the form "<number> <unit>s <from now/ago>"
 #' such as:
 #'
 #' \itemize{
@@ -112,7 +112,7 @@ extract_time <- function(matches, time) {
 
 parse_time.default <- function(time) {
   stop("Time provided to ", crayon::red("testthatsomemore::pretend_now_is"),
-       "is in an invalid format. Must be a ", sQuote("POSIXct"), ", ",
+       " is in an invalid format. Must be a ", sQuote("POSIXct"), ", ",
        sQuote("Date"), ", or ", sQuote("character"), ".", call. = FALSE)
 }
 
