@@ -36,8 +36,6 @@
 #'    10))
 #' })
 pretend_now_is <- function(time, expr) {
-  current_time <- Sys.time()
-
   time <- parse_time(time)
 
   eval.parent(substitute({
