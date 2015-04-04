@@ -6,6 +6,7 @@
 #' 
 #' @param ... Named expressions are options, unnamed are evaluated.
 #' @return the value of the last evaluated expression.
+#' @aliases with_option
 #' @export
 #' @examples
 #' with_options(digits = 20, print(pi)) # pi to 20 digits
@@ -33,7 +34,6 @@ with_options <- function(...) {
   out
 }
 
-#' @rdname with_option
 #' @export
 with_options <- with_options
 
