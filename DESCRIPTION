@@ -1,6 +1,6 @@
 Package: testthatsomemore
 Title: A mocking, stubbing, and file testing framework extending testthat
-Version: 0.2.2
+Version: 0.2.3
 Maintainer: Robert Krzyzanowski <technoguyrob@gmail.com>
 Authors@R: c(person("Robert", "Krzyzanowski",
     email = "technoguyrob@gmail.com", role = c("aut", "cre")))
