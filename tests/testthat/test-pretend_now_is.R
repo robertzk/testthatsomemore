@@ -53,7 +53,7 @@ describe("pretend_now_is", {
   test_that("it can pretend Sys.Date is different", {
     tomorrow_date <- as.Date(Sys.Date() + as.difftime(1, units = "days"))
     pretend_now_is("1 day from now", {
-      expect_equal(Sys.Date(), tomorrow_date)
+      expect_equal(Sys.Date(), tomorrow_date, tolerance = 0.1)
     })
   })
 
