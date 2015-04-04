@@ -1,4 +1,4 @@
-context("with_optionss")
+context("with_options")
 
 test_that("it can mock an options", {
   with_options(foo = 1, expect_identical(getOption("foo"), 1))
