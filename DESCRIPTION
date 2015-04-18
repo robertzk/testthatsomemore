@@ -13,7 +13,8 @@ Description: This package intends to go above and beyond the features
     raise the caliber of R testing frameworks to that of famous libraries
     like JUnit and RSpec.
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.0.0),
+    methods
 Imports:
     testthat,
     crayon
