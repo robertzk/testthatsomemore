@@ -9,7 +9,9 @@ in the R-sphere, but there are still some features lacking. `testthatsomemore` p
   * Pretending now is some other time, like Ruby's [Timecop gem](https://github.com/travisjeffery/timecop).
   * Indicating that some tests are pending.
 
-To use, simply run:
+To use, simply run `install.packages("testthatsomemore")` (for the latest
+stable version 0.2.4, uploaded to CRAN on October 10, 2015), or the below
+code to install the latest development version:
 
 ```r
 if (!require(testthatsomemore)) {
@@ -18,7 +20,7 @@ if (!require(testthatsomemore)) {
 }
 ```
 
-and explicitly load `library(testthatsomemore)` before running unit tests with
+Explicitly load `library(testthatsomemore)` before running unit tests with
 `devtools::test`.
 
 Examples
