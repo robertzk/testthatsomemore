@@ -1,3 +1,7 @@
+# Version 0.2.5
+
+  * Added `make_packages` and `dispose_packages` thanks to [gaborcsardi's disposables](https://github.com/gaborcsardi/disposables).
+
 # Version 0.2.2
 
   * Added the `pretend_now_is` time-stubbing helper.

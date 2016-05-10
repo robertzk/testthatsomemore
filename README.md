@@ -7,6 +7,7 @@ in the R-sphere, but there are still some features lacking. `testthatsomemore` p
   * The ability to mock and stub functions and closures, including those in packages.
   * Creation of hierarchical file structures for testing of IO-related functions.
   * Pretending now is some other time, like Ruby's [Timecop gem](https://github.com/travisjeffery/timecop).
+  * Creating full directory mocks of R packages, thanks to [gaborcsardi](https://github.com/gaborcsardi/disposables).
   * Indicating that some tests are pending.
 
 To use, simply run `install.packages("testthatsomemore")` (for the latest
@@ -113,6 +114,54 @@ pretend_now_is("2 months from now", {
   expect_output(show_tip(), "helpful tip")
 })
 ```
+
+Mocks of R packages
+------------------
+
+When developing R packages perform operations on other R packages, writing tests
+can be difficult since you have to simulate your functions on another package.
+
+Thanks to [gaborcsardi's disposables](https://github.com/gaborcsardi/disposables), 
+this is possible with `make_packages` and `dispose_packages`.
+
+```R
+test_that("inheritance works across packages", {
+
+  pkgs <- make_packages(
+    imports = "R6",
+
+    ## Code to put in package 'R6testA'
+    R6testA = {
+      AC <- R6Class(
+        public = list(
+          x = 1
+        )
+      )
+    },
+
+    ## Code to put in package 'R6testB'
+    R6testB = {
+      BC <- R6Class(
+        inherit = R6testA::AC,
+        public = list(
+          y = 2
+        )
+      )
+    }
+
+  )
+
+  ## In case of an error below
+  on.exit(try(dispose_packages(pkgs), silent = TRUE), add = TRUE)
+
+  ## Now ready for the tests
+  B <- BC$new()
+  expect_equal(B$x, 1)
+  expect_equal(B$y, 2)
+
+})
+```
+add README example
 
 Pending
 -------
