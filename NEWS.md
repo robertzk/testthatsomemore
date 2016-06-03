@@ -1,3 +1,7 @@
+# Version 0.2.5
+
+  * Allow package stubbing for loaded, non-installed namespaces.
+
 # Version 0.2.2
 
   * Added the `pretend_now_is` time-stubbing helper.

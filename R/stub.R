@@ -49,9 +49,11 @@
 #' @examples
 #' package_stub("methods", "new", function(...) 'test', stopifnot(new('example') == 'test')) 
 package_stub <- function(package_name, function_name, stubbed_value, expr) {
-  if (!is.element(package_name, utils::installed.packages()[,1]))
+  if (!is.element(package_name, utils::installed.packages()[,1]) &&
+      !is.element(package_name, loadedNamespaces())) {
     stop(gettextf("Could not find package %s for stubbing %s",
                   sQuote(package_name), dQuote(function_name)))
+  }
   stopifnot(is.character(function_name))
   if (!is.function(stubbed_value))
     warning(gettextf("Stubbing %s::%s with a %s instead of a function",
