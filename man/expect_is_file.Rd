@@ -28,11 +28,11 @@ Return an error if a string represents an existent directory.
 }
 \examples{
 library(testthat)
-expect_error(expect_is_file('not/a/file')) # will error
+# expect_error(expect_is_file('not/a/file')) # will error
 tmp <- tempfile(); writeLines('', tmp)
 expect_is_file(tmp) # will not error
 \dontrun{
-expect_is_directory('not/a/dir') # will error
+# expect_is_directory('not/a/dir') # will error
 expect_is_directory(dirname(tempfile())) # will not error
 }
 }

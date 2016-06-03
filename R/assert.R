@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' assert(1 + 1) # This will throw no error.
-#' stopifnot(is(tryCatch(error = identity, assert(not_existent)), 'error'))
+#' # stopifnot(is(tryCatch(error = identity, assert(not_existent)), 'error'))
 #' # The above will produce an error. In unit tests, it will be clear this
 #' # means "We expect no error to occur."
 assert <- function(expr, ...) {
