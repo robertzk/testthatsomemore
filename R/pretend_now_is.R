@@ -39,9 +39,9 @@ pretend_now_is <- function(time, expr) {
   time <- parse_time(time)
 
   eval.parent(substitute({
-    package_stub("base", "Sys.Date", function() as.Date(time),
-    package_stub("base", "date", function() format(time, "%a %b %d %H:%M:%S %Y"),
-    package_stub("base", "Sys.time", function() time, {
+    testthatsomemore::package_stub("base", "Sys.Date", function() as.Date(time),
+    testthatsomemore::package_stub("base", "date", function() format(time, "%a %b %d %H:%M:%S %Y"),
+    testthatsomemore::package_stub("base", "Sys.time", function() time, {
       expr
   })))}))
 }
