@@ -1,7 +1,3 @@
-# Version 0.2.6
-
-  * Extract `pretend_now_is` character to date interpolation into a separate package: https://github.com/peterhurford/strdate
-
 # Version 0.2.5
 
   * Allow package stubbing for loaded, non-installed namespaces.
