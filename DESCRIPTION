@@ -15,7 +15,10 @@ Depends:
     R (>= 3.0.0)
 Imports:
     testthat,
-    crayon
+    crayon,
+    strdate
+Remotes:
+    peterhurford/strdate
 License: MIT + file LICENSE
 LazyData: true
 URL: http://github.com/robertzk/testthatsomemore
