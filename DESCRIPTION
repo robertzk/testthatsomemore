@@ -17,10 +17,9 @@ Imports:
     testthat,
     crayon,
     strdate
-Remotes:
-    peterhurford/strdate
+Remotes: peterhurford/strdate
 License: MIT + file LICENSE
 LazyData: true
 URL: http://github.com/robertzk/testthatsomemore
 BugReports: https://github.com/robertzk/testthatsomemore/issues
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.0

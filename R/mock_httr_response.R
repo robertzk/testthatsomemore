@@ -7,7 +7,6 @@
 #' @export
 #' @examples
 #' mock_httr_response(200L, list(data = "it works!"), "json")
-
 mock_httr_response <- function(status_code, content, type) {
   type <- match.arg(type, c("json", "text"))
   if (identical(type, "json")) {
