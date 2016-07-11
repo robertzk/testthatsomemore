@@ -7,11 +7,11 @@
 mock_httr_response(status_code, content, type)
 }
 \arguments{
+\item{status_code}{integer.}
+
 \item{content}{list.}
 
 \item{type}{character. json or text}
-
-\item{status}{code integer.}
 }
 \value{
 a response object.
