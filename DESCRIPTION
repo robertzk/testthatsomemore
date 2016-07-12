@@ -17,7 +17,8 @@ Imports:
     testthat,
     crayon,
     strdate,
-    jsonlite
+    jsonlite,
+    httr
 Remotes: peterhurford/strdate
 License: MIT + file LICENSE
 LazyData: true
