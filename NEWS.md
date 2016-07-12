@@ -1,3 +1,7 @@
+# Version 0.2.6
+
+  * Added mock_httr_response for mocking httr response objects.
+
 # Version 0.2.5
 
   * Allow package stubbing for loaded, non-installed namespaces.

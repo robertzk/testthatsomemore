@@ -20,7 +20,7 @@ describe("parse_time", {
   })
 
   test_that("it can parse date strings", {
-    expect_equal(parse_time("1 day from now"), strdate::strdate("1 day from now"))
+    expect_equal(as.Date(parse_time("1 day from now")), as.Date(strdate::strdate("1 day from now")))
   })
 })
 
@@ -32,9 +32,9 @@ describe("pretend_now_is", {
   })
 
   test_that("it is able to pretend now is a day from today using character notation", {
-    now      <- Sys.time()
+    now      <- Sys.Date()
     tomorrow <- now + as.difftime(1, units = "days")
-    pretend_now_is("1 day from now", expect_equal(Sys.time(), tomorrow))
+    pretend_now_is("1 day from now", expect_equal(Sys.Date(), tomorrow))
   })
 
   test_that("it can pretend it's 5 seconds ago", {
