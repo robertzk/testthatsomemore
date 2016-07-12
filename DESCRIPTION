@@ -16,7 +16,8 @@ Depends:
 Imports:
     testthat,
     crayon,
-    strdate
+    strdate,
+    jsonlite
 Remotes: peterhurford/strdate
 License: MIT + file LICENSE
 LazyData: true
