@@ -11,22 +11,17 @@ mock_httr_response <- function(status_code, content, type) {
   type <- match.arg(type, c("json", "text"))
 
   if (identical(type, "json")) {
-    if(is.list(content)) { content <- jsonlite::toJSON(content, 
-                              auto_unbox = TRUE, digits = 10)}
-    getFromNamespace("response", "httr")(
-      status_code = status_code,
-      content = charToRaw(content),
-      headers = list(`Content-Type` = "application/json")
-    )
-  } else if (identical(type, "text")) {
-    getFromNamespace("response", "httr")(
-      status_code = status_code,
-      content = charToRaw(content),
-      headers = list(`Content-Type` = "text")
-    )
+    if(is.list(content)) { 
+      content <- jsonlite::toJSON(content, auto_unbox = TRUE, digits = 10)}
+    content_type <- "application/json"
   } else {
-      stop("Unknown Content-Type: ", type)
-  }
+     content_type <- "text"
+  } 
+    getFromNamespace("response", "httr")(
+    status_code = status_code,
+    content = charToRaw(content),
+    headers = list(`Content-Type` = content_type) 
+  )
 }
 
 

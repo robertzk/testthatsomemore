@@ -120,7 +120,7 @@ Mocking httr response
 We want to be able to mock http GET and PUT response objects when testing. For this purpose, you can use mock_httr_response to create an httr object.
 
 ```R
-describe("mocking httr GET, {
+describe("mocking httr GET", {
   with_mock(
     `httr::GET` = function(...) mock_httr_response(200L, list(data = "my data!"), "json"),
     test_that("my test", {

@@ -1,22 +1,17 @@
 context('mock httr response function')
 
 test_that("Mocking works with simple JSON example", {
-  out <-   getFromNamespace("response", "httr")(
-      status_code = 200L,
-      content = charToRaw(jsonlite::toJSON(list(data = "it works!"), 
-      							auto_unbox = TRUE, digits = 10)),
-      headers = list(`Content-Type` = "application/json")
-    )
   result <- mock_httr_response(200L, list(data = "it works!"), "json")
-  expect_identical(result, out)
+  expect_equal(result$status_code, 200L)
+  expect_equal(result$content, charToRaw(jsonlite::toJSON(list(data = "it works!"), auto_unbox = TRUE, digits = 10)))
+  expect_equal(result$headers$`Content-Type`, "application/json")
+  expect_is(result, "response")
 })
 
 test_that("Mocking works with text example", {
-  out <-   getFromNamespace("response", "httr")(
-      status_code = 200L,
-      content = charToRaw("it works!"),
-      headers = list(`Content-Type` = "text")
-    )
   result <- mock_httr_response(200L, "it works!", "text")
-  expect_identical(result, out)
+  expect_equal(result$content, charToRaw("it works!"))
+  expect_equal(result$headers$`Content-Type`, "text")
+  expect_is(result, "response")
 })
+  
