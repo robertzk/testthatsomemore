@@ -40,7 +40,9 @@ describe("pretend_now_is", {
   test_that("it can pretend it's 5 seconds ago", {
     now        <- Sys.time()
     five_s_ago <- now - as.difftime(5, units = "secs")
-    pretend_now_is("5 seconds ago", expect_equal(Sys.time(), five_s_ago))
+    pretend_now_is("5 seconds ago", {
+      expect_equal(as.Date(Sys.time()), as.Date(five_s_ago))
+      })
   })
 
   test_that("it can pretend Sys.Date is different", {
