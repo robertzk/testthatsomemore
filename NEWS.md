@@ -1,3 +1,7 @@
+# Version 0.2.7
+
+  * Added expect_called helper function.
+
 # Version 0.2.6
 
   * Added mock_httr_response for mocking httr response objects.

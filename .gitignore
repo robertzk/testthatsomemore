@@ -1,3 +1,6 @@
 ..Rcheck
 *.Rcheck
 *.tar.gz
+.DS_Store
+src/*.o
+src/*.so

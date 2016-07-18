@@ -1,6 +1,6 @@
 Package: testthatsomemore
 Title: A mocking, stubbing, and file testing framework extending testthat
-Version: 0.2.6
+Version: 0.2.7
 Maintainer: Robert Krzyzanowski <technoguyrob@gmail.com>
 Authors@R: c(person("Robert", "Krzyzanowski",
     email = "technoguyrob@gmail.com", role = c("aut", "cre")))
@@ -24,4 +24,4 @@ License: MIT + file LICENSE
 LazyData: true
 URL: http://github.com/robertzk/testthatsomemore
 BugReports: https://github.com/robertzk/testthatsomemore/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.0
