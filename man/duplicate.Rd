@@ -7,6 +7,9 @@ can be modified safely.}
 \usage{
 duplicate(x)
 }
+\arguments{
+\item{x}{function.}
+}
 \description{
 Duplicate a function. Returns a carbon copy of the original, so that original
 can be modified safely.

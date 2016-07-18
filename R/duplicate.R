@@ -1,6 +1,7 @@
 #' Duplicate a function. Returns a carbon copy of the original, so that original
 #' can be modified safely.
 #'
+#' @param x function.
 #' @examples
 #' \dontrun{
 #'    fn <- function(x) cat(x, "\n")
