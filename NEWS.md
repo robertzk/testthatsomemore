@@ -1,3 +1,7 @@
+# Version 0.2.7
+
+  * Fixed a bug in `within_file_structure`.
+
 # Version 0.2.6
 
   * Added mock_httr_response for mocking httr response objects.
