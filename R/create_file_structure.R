@@ -113,6 +113,6 @@ within_file_structure <- function(files, expr, dir) {
   if (missing(expr))
     stop("You must provide an expression to evaluate for ",
          sQuote('within_file_structure'))
-  eval.parent(substitute(create_file_structure(files, expr, dir)))
+  eval.parent(substitute(testthatsomemore::create_file_structure(files, expr, dir)))
 }
 
